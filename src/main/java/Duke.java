@@ -7,7 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 
 public class Duke extends Application {
 
@@ -16,8 +19,12 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    /**
+     * this is the main function for duke.
+     * */
 
-    /** this is the main function for duke. */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -28,7 +35,10 @@ public class Duke extends Application {
     }
 
     @Override
-    /** Creating the GUI with JavaFX - Excercise 2.*/
+    /**
+     * Creating the GUI with JavaFX - Excercise 2.
+     * */
+
     public void start(Stage stage) throws Exception {
         // Step 1. Setting up required components.
 
@@ -88,6 +98,17 @@ public class Duke extends Application {
             userInput.clear();
         });
 
+        // Scroll down to the end every time the dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
     }
     /**
      * Iteration 1:
@@ -102,6 +123,30 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+
+    /** Iteration 2:
+     * Creates 2 dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Duke response to user input.
+     * */
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
 }
 
 
