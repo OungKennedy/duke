@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
 
 public class Duke extends Application {
 
@@ -32,7 +33,64 @@ public class Duke extends Application {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        greeting("hi");
+        // create scanner object
+        Scanner inputScanner = new Scanner(System.in);
+
+        while (true) {
+            String userInput = inputScanner.nextLine();
+            handle_input(userInput);
+        }
     }
+
+    /**
+     * Method to greet user. Called at startup/ exit.
+     */
+
+    static void greeting(String greetingType) {
+        String hiGreeting = "Hello! I'm Duke\nWhat can I do for you?";
+        String byeGreeting = "Bye. Hope to see you again soon!";
+        String greeting;
+        switch (greetingType) {
+        case "hi" :
+            greeting = hiGreeting;
+            break;
+        case "bye" :
+            greeting = byeGreeting;
+            System.out.print(addBorder(greeting));
+            System.exit(0);
+            break;
+        default :
+            greeting = greetingType;
+            break;
+        }
+        greeting = addBorder(greeting);
+        System.out.print(greeting);
+        return;
+    }
+
+    /**
+     * Method to add horizontal lines above and below Duke output.
+     * */
+    static String addBorder(String dukeOutput) {
+        String border = "____________________________________________________________";
+        return border + '\n' + dukeOutput + '\n' + border + '\n';
+    }
+
+    /**
+     * Handles user input.
+     * */
+
+    static void handle_input(String userInput) {
+        greeting(userInput);
+        return;
+    }
+
+
+
+
+
+
 
     @Override
     /**
