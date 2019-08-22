@@ -50,31 +50,42 @@ public class Duke extends Application {
     static void greeting(String greetingType) {
         String hiGreeting = "Hello! I'm Duke\nWhat can I do for you?";
         String byeGreeting = "Bye. Hope to see you again soon!";
-        String greeting;
+        String greeting = null;
         switch (greetingType) {
         case "hi" :
             greeting = hiGreeting;
             break;
         case "bye" :
             greeting = byeGreeting;
-            System.out.print(addBorder(greeting));
+            System.out.println(addBorder());
+            System.out.println(greeting);
+            System.out.println(addBorder());
             System.exit(0);
+            break;
+        case "list":
+            System.out.println(addBorder());
+            taskMaster.listTasks();
+            System.out.println(addBorder());
             break;
         default :
             greeting = greetingType;
+            taskMaster.addTask(greeting);
             break;
         }
-        greeting = addBorder(greeting);
-        System.out.print(greeting);
+        if (greeting != null) {
+            System.out.println(addBorder());
+            System.out.println("added: " + greeting);
+            System.out.println(addBorder());
+        }
         return;
     }
 
     /**
      * Method to add horizontal lines above and below Duke output.
      * */
-    static String addBorder(String dukeOutput) {
+    static String addBorder() {
         String border = "____________________________________________________________";
-        return border + '\n' + dukeOutput + '\n' + border + '\n';
+        return border;
     }
 
     /**
