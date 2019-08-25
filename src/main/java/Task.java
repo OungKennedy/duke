@@ -1,17 +1,17 @@
-public class Task {
-    protected String description;
-    protected boolean isDone;
+class Task {
+    String description;
+    private boolean isDone;
 
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbol.
+    String getStatusIcon() {
+        return (isDone ? '[' + "\u2713" + ']': '[' + "\u2718" + ']'); // Return tick or X symbol.
     }
 
-    public void markAsDone() {
+    void markAsDone() {
         this.isDone = true;
     }
 }

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke extends Application {
@@ -33,10 +34,9 @@ public class Duke extends Application {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        greeting("hi");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         // create scanner object
         Scanner inputScanner = new Scanner(System.in);
-
         while (true) {
             String userInput = inputScanner.nextLine();
             handle_input(userInput);
@@ -44,57 +44,49 @@ public class Duke extends Application {
     }
 
     /**
-     * Method to greet user. Called at startup/ exit.
-     */
-
-    static void greeting(String greetingType) {
-        String hiGreeting = "Hello! I'm Duke\nWhat can I do for you?";
-        String byeGreeting = "Bye. Hope to see you again soon!";
-        String greeting = null;
-        switch (greetingType) {
-        case "hi" :
-            greeting = hiGreeting;
-            break;
-        case "bye" :
-            greeting = byeGreeting;
-            System.out.println(addBorder());
-            System.out.println(greeting);
-            System.out.println(addBorder());
-            System.exit(0);
-            break;
-        case "list":
-            System.out.println(addBorder());
-            taskMaster.listTasks();
-            System.out.println(addBorder());
-            break;
-        default :
-            greeting = greetingType;
-            taskMaster.addTask(greeting);
-            break;
-        }
-        if (greeting != null) {
-            System.out.println(addBorder());
-            System.out.println("added: " + greeting);
-            System.out.println(addBorder());
-        }
-        return;
-    }
-
-    /**
-     * Method to add horizontal lines above and below Duke output.
-     * */
-    static String addBorder() {
-        String border = "____________________________________________________________";
-        return border;
-    }
-
-    /**
      * Handles user input.
      * */
 
-    static void handle_input(String userInput) {
-        greeting(userInput);
-        return;
+    private static void handle_input(String userInput) {
+        boolean byeSignal = false;
+        ArrayList<String>
+            dukeReply = new ArrayList<String>();
+        if (userInput.equals("bye")) {
+            dukeReply.add("Bye. Hope to see you again soon!");
+            byeSignal = true;
+        } else if (userInput.equals("list")) {
+            ArrayList<String> taskList = TaskMaster.listTasks();
+
+            dukeReply.addAll(taskList);
+        } else if (userInput.contains("done")) {
+            // get index of task to mark as done, as an integer.
+            Integer taskIndex = Integer.parseInt(userInput.substring(userInput.length() - 1)) - 1;
+            ArrayList<String> tempReply = TaskMaster.resolveTask(taskIndex);
+            dukeReply.addAll(tempReply);
+        } else {
+            TaskMaster.addTask(userInput);
+
+            dukeReply.add("added: " + userInput);
+        }
+        // Add border to front and back of dukeReply.
+        String border = "____________________________________________________________";
+
+            dukeReply.add(0,border);
+
+            dukeReply.add(border);
+        for (int i = 0; i <
+            dukeReply.size(); i++) {
+            String paddedString =
+            dukeReply.get(i);
+            paddedString = "    " + paddedString;
+            // print out each line.
+            System.out.println(paddedString);
+
+            dukeReply.set(i, paddedString);
+        }
+        if (byeSignal) {
+            System.exit(1);
+        }
     }
 
 
