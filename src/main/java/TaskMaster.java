@@ -13,35 +13,35 @@ class TaskMaster {
         Task newTask = new Task(description);
         taskList.add(newTask);
     }
-    /** Function that inserts task description and status icon into an ArrayList
-     * @return an array list of (Strings) tasks
+    /** Function that inserts task description and status icon into an ArrayList.
+     * @return an array list of (Strings) tasks.
      * */
 
     static ArrayList<String> listTasks() {
-        ArrayList<String> TaskList = new ArrayList<String>();
-        TaskList.add("Here are the tasks in your list:");
+        ArrayList<String> taskarrayList = new ArrayList<String>();
+        taskarrayList.add("Here are the tasks in your list:");
         int counter = 1;
         for (Task t: taskList) {
-            String TaskListEntry = "";
-            TaskListEntry += counter++;
+            String tasklistEntry = "";
+            tasklistEntry += counter++;
             String statusIcon = t.getStatusIcon();
-            TaskListEntry += ". " + statusIcon + " " + t.description;
-            TaskList.add(TaskListEntry);
+            tasklistEntry += ". " + statusIcon + " " + t.description;
+            taskarrayList.add(tasklistEntry);
         }
-        return TaskList;
+        return taskarrayList;
     }
 
     /**
-     * Sets task as done, and return array list of replies to handle_input function
-     * @param taskIndex: Integer representing index of task to mark as done.
-     * @return reply: an ArrayList<String> containing the replies to return to handle_input function.
+     * Sets task as done, and return array list of replies to handle_input function.
+     * @param taskIndex : Integer representing index of task to mark as done.
+     * @return reply : an ArrayList of Strings containing the replies to return to handle_input function.
      */
 
     static ArrayList<String> resolveTask(Integer taskIndex) {
         ArrayList<String> reply = new ArrayList<String>();
         reply.add("Nice! I've marked this task as done:");
         Task doneTask = taskList.get(taskIndex);
-        reply.add('[' + "\u2713" + ']' + " " + doneTask.description);
+        reply.add(String.format("%s✓] %s", '[', doneTask.description));
         doneTask.markAsDone();
         taskList.set(taskIndex, doneTask);
         return reply;

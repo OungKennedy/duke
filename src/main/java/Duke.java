@@ -71,13 +71,11 @@ public class Duke extends Application {
         // Add border to front and back of dukeReply.
         String border = "____________________________________________________________";
 
-            dukeReply.add(0,border);
+        dukeReply.add(0,border);
 
-            dukeReply.add(border);
-        for (int i = 0; i <
-            dukeReply.size(); i++) {
-            String paddedString =
-            dukeReply.get(i);
+        dukeReply.add(border);
+        for (int i = 0; i < dukeReply.size(); i++) {
+            String paddedString = dukeReply.get(i);
             paddedString = "    " + paddedString;
             // print out each line.
             System.out.println(paddedString);
