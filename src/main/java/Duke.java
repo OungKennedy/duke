@@ -19,8 +19,6 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     /**
@@ -49,8 +47,8 @@ public class Duke extends Application {
 
     private static void handle_input(String userInput) {
         boolean byeSignal = false;
-        ArrayList<String>
-            dukeReply = new ArrayList<String>();
+        String firstWord = userInput.split(" ")[0];
+        ArrayList<String> dukeReply = new ArrayList<String>();
         if (userInput.equals("bye")) {
             dukeReply.add("Bye. Hope to see you again soon!");
             byeSignal = true;
@@ -58,15 +56,13 @@ public class Duke extends Application {
             ArrayList<String> taskList = TaskMaster.listTasks();
 
             dukeReply.addAll(taskList);
-        } else if (userInput.contains("done")) {
+        } else if (firstWord.equals("done")) {
             // get index of task to mark as done, as an integer.
             Integer taskIndex = Integer.parseInt(userInput.substring(userInput.length() - 1)) - 1;
             ArrayList<String> tempReply = TaskMaster.resolveTask(taskIndex);
             dukeReply.addAll(tempReply);
         } else {
-            TaskMaster.addTask(userInput);
-
-            dukeReply.add("added: " + userInput);
+            dukeReply.addAll(TaskMaster.addTask(userInput));
         }
         // Add border to front and back of dukeReply.
         String border = "____________________________________________________________";
@@ -107,12 +103,12 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();
