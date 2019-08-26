@@ -62,7 +62,11 @@ public class Duke extends Application {
             ArrayList<String> tempReply = TaskMaster.resolveTask(taskIndex);
             dukeReply.addAll(tempReply);
         } else {
-            dukeReply.addAll(TaskMaster.addTask(userInput));
+            try {
+                dukeReply.addAll(TaskMaster.addTask(userInput));
+            } catch (EmptyDescriptionException | InvalidTaskTypeException ex) {
+                dukeReply.add(ex.getMessage());
+            }
         }
         // Add border to front and back of dukeReply.
         String border = "____________________________________________________________";
