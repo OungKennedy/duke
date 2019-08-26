@@ -1,7 +1,13 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     private static int totalTasks = 0; // should do something with this.
+
+    public enum Tasktype {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
 
     public Task(String description) {
         this.description = description;
@@ -11,6 +17,8 @@ public class Task {
     String getStatusIcon() {
         return (isDone ? '[' + "\u2713" + ']' : '[' + "\u2718" + ']'); // Return tick or X symbol.
     }
+
+    public abstract String toSaveData();
 
     /**
      * function that forms response string for "list" command.
@@ -23,4 +31,5 @@ public class Task {
     void markAsDone() {
         this.isDone = true;
     }
+
 }

@@ -1,9 +1,16 @@
 public class Event extends Task {
     protected String at;
 
+    Tasktype tasktype = Tasktype.EVENT;
+
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    @Override
+    public String toSaveData() {
+        return "[E]|" + String.format(isDone ? "1" : "0") + "|" + description + "|" + at;
     }
 
     @Override

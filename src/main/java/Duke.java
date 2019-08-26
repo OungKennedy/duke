@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class Duke extends Application {
      * this is the main function for duke.
      * */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -45,7 +46,7 @@ public class Duke extends Application {
      * Handles user input.
      * */
 
-    private static void handle_input(String userInput) {
+    private static void handle_input(String userInput) throws IOException {
         boolean byeSignal = false;
         String firstWord = userInput.split(" ")[0];
         ArrayList<String> dukeReply = new ArrayList<String>();
@@ -83,6 +84,7 @@ public class Duke extends Application {
             dukeReply.set(i, paddedString);
         }
         if (byeSignal) {
+            TaskMaster.savetoFile();
             System.exit(1);
         }
     }

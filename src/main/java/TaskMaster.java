@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -76,4 +79,16 @@ class TaskMaster {
         return reply;
     }
 
+    /**
+     * Function to save task information to file
+     * @throws IOException
+     */
+    public static void savetoFile() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
+        for (int i = 0; i < taskList.size(); i += 1) {
+            String tasksaveData = taskList.get(i).toSaveData();
+            writer.write(tasksaveData);
+        }
+        writer.close();
+    }
 }
