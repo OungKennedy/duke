@@ -2,6 +2,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     private static int totalTasks = 0; // should do something with this.
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -12,8 +13,8 @@ public class Task {
     }
 
     /**
-     * function that forms response string for "list" command
-     * @return String containing one sentence description of Task along with status icon
+     * function that forms response string for "list" command.
+     * @return String containing one sentence description of Task along with status icon.
      */
     public String toString() {
         return getStatusIcon() + " " + description;
