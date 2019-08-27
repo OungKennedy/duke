@@ -33,6 +33,8 @@ public class Duke extends Application {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        // read from save file
+        TaskMaster.readFromSave();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         // create scanner object
         Scanner inputScanner = new Scanner(System.in);
@@ -84,7 +86,7 @@ public class Duke extends Application {
             dukeReply.set(i, paddedString);
         }
         if (byeSignal) {
-            TaskMaster.savetoFile();
+            TaskMaster.saveToFile();
             System.exit(1);
         }
     }

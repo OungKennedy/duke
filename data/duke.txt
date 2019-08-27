@@ -1,1 +1,1 @@
-[D]|0|eat breakfast|Monday
+[T]|0|buy food|

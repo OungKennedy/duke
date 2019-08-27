@@ -1,9 +1,8 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * handles all the tasks.
@@ -20,7 +19,7 @@ class TaskMaster {
         String[] inputDetails = userInput.split(" ", 2);
         String taskType = inputDetails[0];
         if (inputDetails.length == 1) {
-            throw new EmptyDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new EmptyDescriptionException("☹ OOPS!!! The description of a task cannot be empty.");
         }
         switch (taskType) {
         case "todo":
@@ -83,12 +82,61 @@ class TaskMaster {
      * Function to save task information to file
      * @throws IOException
      */
-    public static void savetoFile() throws IOException {
+    public static void saveToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
         for (int i = 0; i < taskList.size(); i += 1) {
             String tasksaveData = taskList.get(i).toSaveData();
             writer.write(tasksaveData);
         }
         writer.close();
+    }
+
+    /**
+     * Function to read from save file. Called on duke launch.
+     * @throws FileNotFoundException
+     */
+
+    static void readFromSave() throws FileNotFoundException {
+        try {
+            Scanner in = new Scanner(new FileReader("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
+            while (in.hasNext()) {
+                String newTask = in.nextLine();
+                addTaskFromSave(newTask);
+            }
+        } catch (FileNotFoundException | InvalidTaskTypeException ignored) {
+        }
+    }
+
+    /**
+     * Function to add task to taskList from line in save file.
+     * @param TaskString String that contains information from save file. In the format of (task type | isDone | Description | by/at )
+     * @throws InvalidTaskTypeException
+     */
+    private static void addTaskFromSave(String TaskString) throws InvalidTaskTypeException {
+        String[] taskDetails = TaskString.split("\\|");
+        switch (taskDetails[0]) {
+            case "[D]":
+                Deadline newDeadline = new Deadline(taskDetails[2],taskDetails[3]);
+                newDeadline.isDone = taskDetails[1].equals("1");
+                taskList.add(newDeadline);
+                break;
+
+            case "[E]":
+                Event newEvent = new Event(taskDetails[2],taskDetails[3]);
+                newEvent.isDone = taskDetails[1].equals("1");
+                taskList.add(newEvent);
+                break;
+
+            case "[T]":
+                Todo newTodo = new Todo(taskDetails[2]);
+                newTodo.isDone = taskDetails[1].equals("1");
+                taskList.add(newTodo);
+                break;
+
+            default:
+                System.out.println("error" + taskDetails[0]);
+                throw new InvalidTaskTypeException("error loading saved task. current line: " + TaskString);
+        }
+
     }
 }
