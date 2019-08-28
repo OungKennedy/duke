@@ -53,13 +53,13 @@ class TaskMaster {
      * */
 
     static ArrayList<String> listTasks() {
-        ArrayList<String> taskarrayList = new ArrayList<String>();
-        taskarrayList.add("Here are the tasks in your list:");
+        ArrayList<String> taskArrayList = new ArrayList<String>();
+        taskArrayList.add("Here are the tasks in your list:");
         int counter = 1;
         for (Task t: taskList) {
-            taskarrayList.add(t.toString());
+            taskArrayList.add(counter++ + ". " + t.toString());
         }
-        return taskarrayList;
+        return taskArrayList;
     }
 
     /**
@@ -80,13 +80,14 @@ class TaskMaster {
 
     /**
      * Function to save task information to file
-     * @throws IOException
+     * @throws IOException: invalid input/ output?
      */
     public static void saveToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
         for (int i = 0; i < taskList.size(); i += 1) {
             String tasksaveData = taskList.get(i).toSaveData();
             writer.write(tasksaveData);
+            writer.newLine();
         }
         writer.close();
     }

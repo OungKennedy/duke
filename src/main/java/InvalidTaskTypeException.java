@@ -1,5 +1,5 @@
-public class InvalidTaskTypeException extends Exception {
-    public InvalidTaskTypeException(String message) {
+class InvalidTaskTypeException extends Exception {
+    InvalidTaskTypeException(String message) {
         super(message);
     }
 }

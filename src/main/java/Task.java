@@ -1,6 +1,8 @@
+import java.util.Calendar;
+
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    String description;
+    boolean isDone;
     private static int totalTasks = 0; // should do something with this.
 
     public enum Tasktype {
@@ -9,12 +11,12 @@ public abstract class Task {
         TODO
     }
 
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? '[' + "\u2713" + ']' : '[' + "\u2718" + ']'); // Return tick or X symbol.
     }
 
@@ -32,4 +34,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /** Function to change the calendar time to a version accepted when adding tasks.
+     * For save to file function.
+     * @param time Calendar object containing the deadline of this task
+     * @return String containing the time in the format dd/mm/yyyy HHMM (military time)
+     */
+    String toSaveTime(Calendar time) {
+        return time.DAY_OF_MONTH + "/" + time.MONTH + "/" + time.YEAR + " " + time.HOUR_OF_DAY + time.MINUTE;
+    }
 }
