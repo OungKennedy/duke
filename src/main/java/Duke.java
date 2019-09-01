@@ -64,6 +64,11 @@ public class Duke extends Application {
             Integer taskIndex = Integer.parseInt(userInput.substring(userInput.length() - 1)) - 1;
             ArrayList<String> tempReply = TaskMaster.resolveTask(taskIndex);
             dukeReply.addAll(tempReply);
+        } else if (firstWord.equals("delete")) {
+            // remove task
+            Integer taskIndex = Integer.parseInt(userInput.substring(userInput.length() - 1)) - 1;
+            ArrayList<String> tempReply = TaskMaster.deleteTask(taskIndex);
+            dukeReply.addAll(tempReply);
         } else {
             try {
                 dukeReply.addAll(TaskMaster.addTask(userInput));

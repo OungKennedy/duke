@@ -79,6 +79,23 @@ class TaskMaster {
     }
 
     /**
+     * Removes task from list, and return array list of replies to handle_input function.
+     * @param taskIndex : Integer representing index of task to mark as done.
+     * @return reply : an ArrayList of Strings containing the replies to return to handle_input function.
+     */
+
+    static ArrayList<String> deleteTask(Integer taskIndex) {
+        ArrayList<String> reply = new ArrayList<String>();
+        reply.add("Noted. I've removed this task:");
+        Task doneTask = taskList.get(taskIndex);
+        reply.add(doneTask.toString());
+        doneTask.decreaseTotalTasks();
+        taskList.remove(doneTask);
+        reply.add(String.format("Now you have %d tasks in your list.",doneTask.returnTotalTasks()));
+        return reply;
+    }
+
+    /**
      * Function to save task information to file
      * @throws IOException: invalid input/ output?
      */

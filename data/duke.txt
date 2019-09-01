@@ -1,3 +1,2 @@
-[T]|1|buy food|
 [E]|0|book fair|5/2/1 1112
 [D]|0|book deal|5/2/1 1112

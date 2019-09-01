@@ -13,7 +13,15 @@ public abstract class Task {
 
     Task(String description) {
         this.description = description;
+        totalTasks += 1;
         this.isDone = false;
+    }
+    int returnTotalTasks() {
+        return totalTasks;
+    }
+
+    public void decreaseTotalTasks(){
+        totalTasks -= 1;
     }
 
     private String getStatusIcon() {
