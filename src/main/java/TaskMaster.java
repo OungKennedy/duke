@@ -92,6 +92,18 @@ class TaskMaster {
         writer.close();
     }
 
+    static ArrayList<String> findTask(String keywords) {
+        ArrayList<String> tempReply = new ArrayList<String>();
+        tempReply.add("Here are the matching tasks in your list:");
+        int counter = 1;
+        for (Task t: taskList) {
+            if (t.description.contains(keywords)) {
+                String taskString = String.valueOf(counter++) + "." + t.toString();
+                tempReply.add(taskString);
+            }
+        }
+        return tempReply;
+    }
     /**
      * Function to read from save file. Called on duke launch.
      * @throws FileNotFoundException
