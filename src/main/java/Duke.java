@@ -68,6 +68,9 @@ public class Duke extends Application {
             // remove task
             Integer taskIndex = Integer.parseInt(userInput.substring(userInput.length() - 1)) - 1;
             ArrayList<String> tempReply = TaskMaster.deleteTask(taskIndex);
+        } else if (firstWord.equals("find")) {
+            String keywords = userInput.split(firstWord + " ")[1];
+            ArrayList<String> tempReply = TaskMaster.findTask(keywords);
             dukeReply.addAll(tempReply);
         } else {
             try {
