@@ -20,7 +20,7 @@ public abstract class Task {
         return totalTasks;
     }
 
-    public void decreaseTotalTasks(){
+    void decreaseTotalTasks(){
         totalTasks -= 1;
     }
 

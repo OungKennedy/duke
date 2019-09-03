@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,13 +7,13 @@ import java.util.Scanner;
  */
 
 class TaskMaster {
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     static ArrayList<String> addTask(String userInput) throws EmptyDescriptionException, InvalidTaskTypeException {
-        ArrayList<String> addTaskArrayList = new ArrayList<String>();
+        ArrayList<String> addTaskArrayList = new ArrayList<>();
         addTaskArrayList.add("Got it. I've added this task");
-        String description = "";
-        String time = "";
+        String description;
+        String time;
         String[] inputDetails = userInput.split(" ", 2);
         String taskType = inputDetails[0];
         if (inputDetails.length == 1) {
@@ -53,7 +51,7 @@ class TaskMaster {
      * */
 
     static ArrayList<String> listTasks() {
-        ArrayList<String> taskArrayList = new ArrayList<String>();
+        ArrayList<String> taskArrayList = new ArrayList<>();
         taskArrayList.add("Here are the tasks in your list:");
         int counter = 1;
         for (Task t: taskList) {
@@ -69,7 +67,7 @@ class TaskMaster {
      */
 
     static ArrayList<String> resolveTask(Integer taskIndex) {
-        ArrayList<String> reply = new ArrayList<String>();
+        ArrayList<String> reply = new ArrayList<>();
         reply.add("Nice! I've marked this task as done:");
         Task doneTask = taskList.get(taskIndex);
         reply.add(String.format("%s✓] %s", '[', doneTask.description));
@@ -85,7 +83,7 @@ class TaskMaster {
      */
 
     static ArrayList<String> deleteTask(Integer taskIndex) {
-        ArrayList<String> reply = new ArrayList<String>();
+        ArrayList<String> reply = new ArrayList<>();
         reply.add("Noted. I've removed this task:");
         Task doneTask = taskList.get(taskIndex);
         reply.add(doneTask.toString());
@@ -99,10 +97,10 @@ class TaskMaster {
      * Function to save task information to file
      * @throws IOException: invalid input/ output?
      */
-    public static void saveToFile() throws IOException {
+    static void saveToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
-        for (int i = 0; i < taskList.size(); i += 1) {
-            String tasksaveData = taskList.get(i).toSaveData();
+        for (Task task : taskList) {
+            String tasksaveData = task.toSaveData();
             writer.write(tasksaveData);
             writer.newLine();
         }
@@ -110,12 +108,12 @@ class TaskMaster {
     }
 
     static ArrayList<String> findTask(String keywords) {
-        ArrayList<String> tempReply = new ArrayList<String>();
+        ArrayList<String> tempReply = new ArrayList<>();
         tempReply.add("Here are the matching tasks in your list:");
         int counter = 1;
         for (Task t: taskList) {
             if (t.description.contains(keywords)) {
-                String taskString = String.valueOf(counter++) + "." + t.toString();
+                String taskString = counter++ + "." + t.toString();
                 tempReply.add(taskString);
             }
         }
@@ -123,10 +121,9 @@ class TaskMaster {
     }
     /**
      * Function to read from save file. Called on duke launch.
-     * @throws FileNotFoundException
      */
 
-    static void readFromSave() throws FileNotFoundException {
+    static void readFromSave() {
         try {
             Scanner in = new Scanner(new FileReader("C:/Users/oungk/OneDrive/Documents/School Work/CS2113/duke/data/duke.txt"));
             while (in.hasNext()) {
@@ -140,7 +137,6 @@ class TaskMaster {
     /**
      * Function to add task to taskList from line in save file.
      * @param TaskString String that contains information from save file. In the format of (task type | isDone | Description | by/at )
-     * @throws InvalidTaskTypeException
      */
     private static void addTaskFromSave(String TaskString) throws InvalidTaskTypeException {
         String[] taskDetails = TaskString.split("\\|");

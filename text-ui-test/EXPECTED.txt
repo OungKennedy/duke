@@ -1,1 +1,5 @@
-/** Add expected output here.*/
+    ____________________________________________________________
+     Got it. I've added this task: 
+       [E][✗] book signing (at: 2/10/1997 1800)
+     Now you have 4 tasks in the list.
+    ____________________________________________________________

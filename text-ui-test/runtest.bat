@@ -1,16 +1,16 @@
-@ECHO OFF
+javac -version
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
 REM delete output from previous run
-del ACTUAL.TXT
+if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+javac  -cp ../src -d "C:\Program Files\AdoptOpenJDK\jdk-11.0.4.11-hotspot\bin" ../src\main\java\Duke.java
 IF ERRORLEVEL 1 (
-   echo ********** BUILD FAILURE **********
-   exit /b 1
+    echo ********** BUILD FAILURE **********
+    exit /b 1
 )
 REM no error here, errorlevel == 0
 
