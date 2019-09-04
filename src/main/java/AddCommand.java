@@ -1,5 +1,5 @@
-public class AddCommand extends Command {
-    String[] taskDetails;
+class AddCommand extends Command {
+    private String[] taskDetails;
     AddCommand(String[] taskDetails) {
         this.taskDetails = taskDetails;
     }

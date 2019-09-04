@@ -18,7 +18,7 @@ public class Deadline extends Task {
             this.by = calendar;
 
         } catch (Exception ex) {
-            System.out.println("Error setting date for deadline: " + description + "at time " + by);
+            System.out.println("        Error setting date for deadline: " + description + "at time " + by);
         }
     }
 

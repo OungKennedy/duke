@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class findCommand extends Command {
+class findCommand extends Command {
     private String keywords;
     findCommand(String keywords) {
         this.keywords = keywords;

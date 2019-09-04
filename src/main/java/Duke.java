@@ -33,6 +33,7 @@ public class Duke extends Application {
                 isExit = c.isExit;
             } catch (InvalidDataException | InvalidTaskTypeException | IOException e) {
                 ui.addLine(e.getMessage());
+                ui.giveReply();
             } finally {
                 // print close border of duke response
                 ui.showLine();
