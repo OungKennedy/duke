@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Duke extends Application {
-    public static Ui ui;
+    private static Ui ui;
     public static TaskList tasks;
     private static Storage storage;
 
@@ -20,7 +20,7 @@ public class Duke extends Application {
         }
     }
 
-    private static void run() {
+    private static void run() throws Exception {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -45,14 +45,14 @@ public class Duke extends Application {
     /**
      * this is the main function for duke.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws Exception {
         String filePath = "C:\\Users\\oungk\\OneDrive\\Documents\\School Work\\CS2113\\duke\\data\\duke.txt";
         new Duke(filePath);
         run();
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
     }
 }

@@ -16,11 +16,12 @@ public abstract class Task {
         totalTasks += 1;
         this.isDone = false;
     }
+
     int returnTotalTasks() {
         return totalTasks;
     }
 
-    void decreaseTotalTasks(){
+    void decreaseTotalTasks() {
         totalTasks -= 1;
     }
 

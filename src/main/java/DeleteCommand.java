@@ -1,8 +1,9 @@
 class DeleteCommand extends Command {
     private int deleteIndex;
     // deleteIndex - 1 for 1 indexing
+
     DeleteCommand(int deleteIndex) {
-        this.deleteIndex = deleteIndex-1;
+        this.deleteIndex = deleteIndex - 1;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {

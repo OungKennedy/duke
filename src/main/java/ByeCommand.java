@@ -1,9 +1,11 @@
 import java.io.IOException;
 
-class byeCommand extends Command{
-    byeCommand() throws IOException {
+class ByeCommand extends Command {
+
+    ByeCommand() {
         isExit = true;
     }
+
     void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.addLine("See you soon!");
         try {

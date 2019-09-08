@@ -1,4 +1,3 @@
-import java.io.IOException;
 
 class Parser {
     static Command parse(String fullCommand) throws InvalidDataException {
@@ -6,58 +5,55 @@ class Parser {
         String firstWord = commandArray[0];
         Command c;
         switch (firstWord) {
-            case "list":
-                c = new ListCommand();
+        case "list":
+            c = new ListCommand();
+            return c;
+        case "delete":
+            // consider inserting exception here for invalid size of array
+            int deleteIndex = Integer.parseInt(commandArray[1]);
+            c = new DeleteCommand(deleteIndex);
+            return c;
+        case "done":
+            // consider inserting exception here for invalid size of array
+            int doneIndex = Integer.parseInt(commandArray[1]);
+            c = new DoneCommand(doneIndex);
+            return c;
+        case "deadline":
+        case "event":
+        case "todo":
+            try {
+                String[] taskDetails = getTaskDetails(firstWord, fullCommand);
+                c = new AddCommand(taskDetails);
                 return c;
-            case "delete":
-                // consider inserting exception here for invalid size of array
-                int deleteIndex = Integer.parseInt(commandArray[1]);
-                c = new DeleteCommand(deleteIndex);
-                return c;
-            case "done":
-                // consider inserting exception here for invalid size of array
-                int doneIndex = Integer.parseInt(commandArray[1]);
-                c = new DoneCommand(doneIndex);
-                return c;
-            case "deadline":
-            case "event":
-            case "todo":
-                try {
-                    String[] taskDetails = getTaskDetails(firstWord, fullCommand);
-                    c = new AddCommand(taskDetails);
-                    return c;
-                } catch (InvalidDataException e){
-                    throw new InvalidDataException("Invalid input. Please try again.");
-                }
-            case "find":
-                try {
-                    String keywords;
-                    keywords = fullCommand.split("find ", 2)[1];
-                    c = new findCommand(keywords);
-                    return c;
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidDataException("please enter a keyword with the find term.");
-                }
-            case "bye":
-                try {
-                    c = new byeCommand();
-                    return c;
-                } catch (IOException e) {
-                    e.getMessage();
-                }
-            default:
+            } catch (InvalidDataException e) {
                 throw new InvalidDataException("Invalid input. Please try again.");
+            }
+        case "find":
+            try {
+                String keywords;
+                keywords = fullCommand.split("find ", 2)[1];
+                c = new FindCommand(keywords);
+                return c;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidDataException("please enter a keyword with the find term.");
+            }
+        case "bye":
+            c = new ByeCommand();
+            return c;
+        default:
+            throw new InvalidDataException("Invalid input. Please try again.");
         }
     }
 
     /**
-     * Function that parses string to get task details
-     * @param fullCommand user initial input
-     * @param taskType task type
-     * @return Array of strings that contain the task details in the order [Task type, task description, time if relevant]
+     * Function that parses string to get task details.
+     * @param fullCommand user initial input.
+     * @param taskType task type.
+     * @return Array of strings that contain the task details in the order
+     *     [Task type, task description, time if relevant].
      * @throws InvalidDataException when there is missing fields in user input.
      */
-    private static String[] getTaskDetails(String taskType, String fullCommand) throws InvalidDataException{
+    private static String[] getTaskDetails(String taskType, String fullCommand) throws InvalidDataException {
         String description;
         String[] taskDetails = new String[0];
         String[] splitCommand = fullCommand.split(" ", 2);
@@ -87,7 +83,7 @@ class Parser {
         return taskDetails;
     }
 
-    static String[] getTaskDetailsFromSave(String TaskString) {
-        return TaskString.split("\\|");
+    static String[] getTaskDetailsFromSave(String taskString) {
+        return taskString.split("\\|");
     }
 }

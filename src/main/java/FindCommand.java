@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
-class findCommand extends Command {
+class FindCommand extends Command {
     private String keywords;
-    findCommand(String keywords) {
+
+    FindCommand(String keywords) {
         this.keywords = keywords;
     }
+
     void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<String> foundTasks = new ArrayList<>();
         for (Task t: TaskList.tasks) {

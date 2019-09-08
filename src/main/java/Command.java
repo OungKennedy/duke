@@ -2,10 +2,11 @@ import java.io.IOException;
 
 public abstract class Command {
     boolean isExit;
-    Command() {
 
+    Command() {
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskTypeException, IOException {}
+    void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
+    }
 
 }
