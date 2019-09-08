@@ -25,7 +25,7 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? '[' + "\u2713" + ']' : '[' + "\u2718" + ']'); // Return tick or X symbol.
+        return (isDone ? "[✓]" : "[✘]"); // Return tick or X symbol.
     }
 
     public abstract String toSaveData();

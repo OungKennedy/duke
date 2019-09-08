@@ -3,9 +3,11 @@ import java.util.Calendar;
 public class Deadline extends Task {
     private Calendar by;
     Tasktype tasktype = Tasktype.DEADLINE;
+    private String timeSaveString = "";
 
     Deadline(String description, String by) {
         super(description);
+        this.timeSaveString = by;
         Calendar calendar = Calendar.getInstance();
         try {
             // get day and month of by string. remaining year and time values are in last element
@@ -24,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveData() {
-        return "[D]|" + (isDone ? "1" : "0") + "|" + description + "|" + toSaveTime(by);
+        return "[D]|" + (isDone ? "1" : "0") + "|" + description + "|" + timeSaveString;
     }
 
     @Override

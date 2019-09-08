@@ -2,11 +2,13 @@ import java.util.Calendar;
 
 public class Event extends Task {
     private Calendar at;
+    private String timeSaveString;
 
     Tasktype tasktype = Tasktype.EVENT;
 
     Event(String description, String at) {
         super(description);
+        this.timeSaveString = at;
         Calendar calendar = Calendar.getInstance();
         // get details of string in array. arranged by day|month|year|military time
         try {
@@ -26,7 +28,7 @@ public class Event extends Task {
 
     @Override
     public String toSaveData() {
-        return "[E]|" + (isDone ? "1" : "0") + "|" + description + "|" + toSaveTime(at);
+        return "[E]|" + (isDone ? "1" : "0") + "|" + description + "|" + timeSaveString;
     }
 
     @Override

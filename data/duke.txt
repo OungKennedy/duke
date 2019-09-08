@@ -1,3 +1,1 @@
-[E]|0|book fair|5/2/1 1112
-[D]|0|book deal|5/2/1 1112
-[T]|0|homework|
+[E]|0|this is a test |02/10/1998 1900
